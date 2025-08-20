@@ -1,0 +1,68 @@
+ [
+        {
+            "id": 1,
+            "title": "Summer Music Festival",
+            "date": "June 15, 2023",
+            "time": "2:00 PM - 10:00 PM",
+            "venue": "City Park Amphitheater",
+            "category": "Music",
+            "description": "Join us for the annual summer music festival featuring local and international artists across multiple stages.",
+            "image": "https://via.placeholder.com/400x200?text=Summer+Music+Festival",
+            "isFavorite": false
+        },
+        {
+            "id": 2,
+            "title": "Tech Conference 2023",
+            "date": "July 22, 2023",
+            "time": "9:00 AM - 6:00 PM",
+            "venue": "Convention Center",
+            "category": "Technology",
+            "description": "A full-day conference featuring talks from industry leaders on the latest trends in technology and innovation.",
+            "image": "https://via.placeholder.com/400x200?text=Tech+Conference",
+            "isFavorite": false
+        },
+        {
+            "id": 3,
+            "title": "Food & Wine Expo",
+            "date": "August 5, 2023",
+            "time": "12:00 PM - 8:00 PM",
+            "venue": "Downtown Expo Hall",
+            "category": "Food & Drink",
+            "description": "Sample culinary delights from top chefs and wineries from around the region.",
+            "image": "https://via.placeholder.com/400x200?text=Food+Wine+Expo",
+            "isFavorite": false
+        },
+        {
+            "id": 4,
+            "title": "Marathon Race",
+            "date": "September 10, 2023",
+            "time": "7:00 AM - 12:00 PM",
+            "venue": "City Streets",
+            "category": "Sports",
+            "description": "Annual city marathon with routes through downtown and along the waterfront. All skill levels welcome.",
+            "image": "https://via.placeholder.com/400x200?text=Marathon",
+            "isFavorite": false
+        },
+        {
+            "id": 5,
+            "title": "Art Exhibition",
+            "date": "October 18, 2023",
+            "time": "10:00 AM - 6:00 PM",
+            "venue": "Modern Art Museum",
+            "category": "Art",
+            "description": "Exhibition featuring works from contemporary artists exploring themes of identity and place.",
+            "image": "https://via.placeholder.com/400x200?text=Art+Exhibition",
+            "isFavorite": false
+        },
+        {
+            "id": 6,
+            "title": "Comedy Night",
+            "date": "November 5, 2023",
+            "time": "8:00 PM - 11:00 PM",
+            "venue": "Laugh Factory",
+            "category": "Comedy",
+            "description": "An evening of stand-up comedy featuring top comedians from across the country.",
+            "image": "https://via.placeholder.com/400x200?text=Comedy+Night",
+            "isFavorite": false
+        }
+    ]
