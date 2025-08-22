@@ -6,7 +6,7 @@ import useApp from "../hooks/useApp";
         
         return (
             <div className="event-card">
-                <img src={event.image} alt={event.title} className="event-image" />
+                <img src={event.images[5]?.url} alt={event.name} className="event-image" />
                 <div className="event-content">
                     <h3 className="event-title">{event.title}</h3>
                     <div className="event-details">
