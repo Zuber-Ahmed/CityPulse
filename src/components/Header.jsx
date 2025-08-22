@@ -1,17 +1,18 @@
 import useApp from "../hooks/useApp";
 
- const Header=({ title, showBackButton = false })=> {
+ const Header=({ title, showBackButton })=> {
         const { isRTL, toggleLanguage, navigateTo, user, logout } = useApp();
+        console.log(showBackButton);
         
         return (
             <header>
                 <div className="logo">
                     {showBackButton && (
-                        <i 
-                            className="fas fa-arrow-left" 
+                        <button 
+                           className="btn btn-primary"  
                             style={{cursor: 'pointer'}}
                             onClick={() => navigateTo('home')}
-                        ></i>
+                        > Back</button>
                     )}
                     <h1>{title}</h1>
                 </div>

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import AppContext from "../contexts/State/State";
-import mockEvents from "../stub/mockjson.json"
-import {searchEvents,getEventDetails} from "../services/eventsService";
+import {searchEvents,getEventDetails,getVenueDetails, getVenueDetailsByCity} from "../services/eventsService";
 
 const AppProvider = ({ children }) => {
 
@@ -9,12 +8,14 @@ const AppProvider = ({ children }) => {
   const [isRTL, setIsRTL] = useState(false);
   const [user, setUser] = useState(null);
   const [events, setEvents] = useState([]);
+  const [eventDetails, setEventDetails] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [searchByeKeyword, setSearchByKeyword] = useState(false);
   const [activeTab, setActiveTab] = useState("favorites");
 
   // Load data from localStorage on initial render
   useEffect(() => {
-    const userData = atob(localStorage.getItem("user"));
+    const userData =localStorage.getItem("user")=== null ? null : atob(localStorage.getItem("user"));
     const favData = localStorage.getItem("favorites");
     const langSetting = localStorage.getItem("isRTL");
 
@@ -30,14 +31,16 @@ const AppProvider = ({ children }) => {
       setIsRTL(langSetting === "true");
     }
     // Simulate splash screen
-    console.log("home-1",getEventDetails().then(data=> data).then(val=>val?._embedded));
+      const fetchEvents = async () => {
+    const eventDetails = await getEventDetails();
+    setEvents(eventDetails?._embedded?.events || []);
+  };
     setTimeout(() => {
       if (!userData) {
         setCurrentScreen("login");
       } else {
         setCurrentScreen("home");
-        
-        setEvents(()=>getEventDetails());
+       fetchEvents();
       }
     }, 2000);
   }, []);
@@ -51,8 +54,9 @@ const AppProvider = ({ children }) => {
   };
 
   // Navigate to different screens
-  const navigateTo = (screen) => {
+  const navigateTo = (screen,data) => {
     setCurrentScreen(screen);
+    setEventDetails(data);
   };
 
   // Login function
@@ -61,10 +65,7 @@ const AppProvider = ({ children }) => {
     const userData = { email,password };
     setUser(userData);
     localStorage.setItem("user", btoa(JSON.stringify(userData)));
-    setCurrentScreen("home");
-    // const data=await 
-    console.log("1",getEventDetails());
-    
+    setCurrentScreen("home"); 
     setEvents(()=>getEventDetails());
   };
 
@@ -91,16 +92,13 @@ const AppProvider = ({ children }) => {
 
   // Search events
   const handleEventSearch = async(keyword, city) => {
-    // In a real app, this would be an API call
+   setSearchByKeyword(true)
     const data=await searchEvents(keyword, city);
-    const filteredEvents = data.filter(
-      (event) =>
-        event.title.toLowerCase().includes(keyword.toLowerCase()) &&
-        event.venue.toLowerCase().includes(city.toLowerCase())
-    );
-    setEvents(filteredEvents);
+    const venueData=await getVenueDetails(city);
+    console.log(venueData?._embedded?.venues);
+    
+    setEvents(venueData?._embedded?.venues || data);
   };
-console.log("===>",events);
 
   const value = {
     currentScreen,
@@ -116,6 +114,10 @@ console.log("===>",events);
     logout,
     toggleFavorite,
     handleEventSearch,
+    setEventDetails,
+    eventDetails,
+    setCurrentScreen,
+    searchByeKeyword
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

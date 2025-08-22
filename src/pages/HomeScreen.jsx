@@ -2,9 +2,10 @@ import { useState } from "react";
 import useApp from "../hooks/useApp";
 import Header from "../components/Header";
 import EventCard from "../components/EventCard";
+import EventVenueDetail from "../components/EventVenueDetail";
 
 const HomeScreen=()=> {
-        const { events, favorites, activeTab, setActiveTab, handleEventSearch } = useApp();
+        const { events, favorites, activeTab, setActiveTab, handleEventSearch,searchByeKeyword } = useApp();
         const [keyword, setKeyword] = useState('');
         const [city, setCity] = useState('');
         
@@ -15,7 +16,7 @@ const HomeScreen=()=> {
         console.log("events",events);
         
         const eventsToShow = activeTab === 'favorites' 
-            ? events.filter(event => favorites.includes(event.id))
+            ? events?.filter(event => favorites.includes(event.id))
             : events;
             
         return (
@@ -49,7 +50,7 @@ const HomeScreen=()=> {
                         </div>
                         <div className="form-group" style={{display: 'flex', alignItems: 'flex-end'}}>
                             <button type="submit" className="btn btn-primary" style={{height: '46px'}}>
-                                <i className="fas fa-search"></i> Search
+                                Search
                             </button>
                         </div>
                     </form>
@@ -71,9 +72,16 @@ const HomeScreen=()=> {
                 </div>
                 
                 <div className="events-container">
-                    {eventsToShow.map(event => (
+                    {searchByeKeyword && events?.map (event=> <EventVenueDetail event={event} />)}
+                    {!searchByeKeyword && eventsToShow.length>0? eventsToShow?.map(event => (
                         <EventCard key={event.id} event={event} />
-                    ))}
+                    )): (
+                        <div className="no-events">
+                            <h2>No Events Found</h2>
+                            <p>Try adjusting your search criteria.</p>
+                            </div>
+                    )
+                            }
                 </div>
             </div>
         );

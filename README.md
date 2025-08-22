@@ -1,70 +1,139 @@
-# Getting Started with Create React App
+# City Pulse - Local Events Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+City Pulse is a React-based web application that allows users to explore, search, and favorite local events. It features authentication, event search by keyword and city, event detail views, venue details, and user profile management.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Project Structure
 
-### `npm start`
+```
+.env
+.gitignore
+package.json
+README.md
+public/
+  index.html
+  manifest.json
+  robots.txt
+src/
+  App.css
+  App.js
+  App.test.js
+  index.css
+  index.js
+  logo.svg
+  reportWebVitals.js
+  setupTests.js
+  components/
+    EventCard.jsx
+    EventVenueDetail.js
+    Header.jsx
+  contexts/
+    AppContext.jsx
+    State/
+      State.jsx
+  hooks/
+    useApp.jsx
+    useLocalStorage.jsx
+  pages/
+    EventDetailScreen.jsx
+    HomeScreen.jsx
+    LoginScreen.jsx
+    ProfileScreen.jsx
+    SplashScreen.jsx
+  services/
+    eventsService.js
+  stub/
+    mockjson.json
+  styles/
+    App.css
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Main Features
 
-### `npm test`
+- **Splash Screen**: Initial loading screen.
+- **Authentication**: Simple login with email and password (mocked).
+- **Event Search**: Search for events by keyword and city using the Ticketmaster API.
+- **Event Details**: View detailed information about selected events.
+- **Venue Details**: View venue information and book events.
+- **Favorites**: Mark/unmark events as favorites and view them in the profile.
+- **Profile**: View user info and favorite events.
+- **RTL Support**: Toggle between LTR and RTL layouts (English/Arabic).
+- **Persistent State**: User and favorites are stored in `localStorage`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Key Technologies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **React** (v19)
+- **React Router DOM** (v7)
+- **Ticketmaster API** for event data
+- **Mapbox/Google Maps** (dependencies included, not fully implemented)
+- **Jest & React Testing Library** for testing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Environment Variables
 
-### `npm run eject`
+- `REACT_APP_TICKETMASTER_API_KEY`: API key for Ticketmaster.
+- `GOOGLE_MAPS_API_KEY`: API key for Google Maps.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+See [.env](.env) for example values.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## How to Run
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Install dependencies:
+   ```sh
+   npm install
+   ```
+2. Start the development server:
+   ```sh
+   npm start
+   ```
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Main Files and Their Roles
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [`src/App.js`](src/App.js): Main app component, handles screen routing based on app state.
+- [`src/contexts/AppContext.jsx`](src/contexts/AppContext.jsx): Provides global state and app logic via React Context.
+- [`src/hooks/useApp.jsx`](src/hooks/useApp.jsx): Custom hook to access app context.
+- [`src/services/eventsService.js`](src/services/eventsService.js): Handles API calls to Ticketmaster.
+- [`src/pages/`](src/pages/): Contains main screens (Splash, Login, Home, Event Detail, Profile).
+- [`src/components/`](src/components/): UI components (Header, EventCard, EventVenueDetail).
+- [`src/styles/App.css`](src/styles/App.css): Main CSS for the app.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Sample Data
 
-### Analyzing the Bundle Size
+- [`src/stub/mockjson.json`](src/stub/mockjson.json): Contains mock event data for development/testing.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## Testing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Run tests with:
+  ```sh
+  npm test
+  ```
+- Test setup in [`src/setupTests.js`](src/setupTests.js).
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Notes
 
-### Deployment
+- The app uses a mock authentication system (no real backend).
+- Event and venue data are fetched from the Ticketmaster API.
+- Some features (like maps) have dependencies included but may require further implementation.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is for educational/demo purposes and bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
